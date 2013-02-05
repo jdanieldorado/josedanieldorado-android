@@ -17,6 +17,8 @@ public class ExampleService extends Service {
 
 	private static final String TAG = ExampleService.class.getSimpleName();
 
+	public static final String SERVICE_THREAD_NAME = "ExampleServiceThread";
+
 	public static final String EXTRA_KEEP_SERVICE_ALIVE = "keepAlive";
 
 	public static final int MSG_TYPE_DONT_KEEP_ALIVE = 0;
@@ -45,7 +47,7 @@ public class ExampleService extends Service {
 		// separate thread because the service normally runs in the process's
 		// main thread, which we don't want to block. We also make it
 		// background priority so CPU-intensive work will not disrupt our UI.
-		HandlerThread thread = new HandlerThread("ServiceStartArguments",
+		HandlerThread thread = new HandlerThread(SERVICE_THREAD_NAME,
 				Process.THREAD_PRIORITY_BACKGROUND);
 		thread.start();
 
@@ -59,7 +61,7 @@ public class ExampleService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.d(TAG, "service starting");
+		Log.d(TAG, "[+] Service Starting...");
 
 		// Indicates if the service keeps alive after handling the message.
 		int keepAlive = intent.getIntExtra(EXTRA_KEEP_SERVICE_ALIVE, 0);
@@ -93,7 +95,7 @@ public class ExampleService extends Service {
 	@Override
 	public void onDestroy() {
 		// Destroy the service.
-		Log.d(TAG, "service done");
+		Log.d(TAG, "[-] Service destroyed");
 	}
 
 	// ===========================================================
@@ -119,7 +121,8 @@ public class ExampleService extends Service {
 
 		@Override
 		public void handleMessage(Message msg) {
-			Log.d(TAG, "Service: " + msg.what + " " + msg.arg1);
+			Log.d(TAG, "[>] [Service] What: " + msg.what + " , StartId: "
+					+ msg.arg1);
 
 			if (msg.arg2 == MSG_TYPE_DONT_KEEP_ALIVE) {
 				// Stop the service using the startId, so that we don't stop
