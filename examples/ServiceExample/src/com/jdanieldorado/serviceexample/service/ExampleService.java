@@ -1,4 +1,4 @@
-package com.hksoftware.serviceexample.service;
+package com.jdanieldorado.serviceexample.service;
 
 import android.app.Service;
 import android.content.Intent;

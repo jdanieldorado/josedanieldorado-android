@@ -1,4 +1,4 @@
-package com.hksoftware.serviceexample;
+package com.jdanieldorado.serviceexample;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.hksoftware.serviceexample.service.ExampleService;
+import com.jdanieldorado.serviceexample.service.ExampleService;
 
 public class ServiceExampleActivity extends Activity {
 
